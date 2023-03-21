@@ -9,14 +9,14 @@ local server_capabilities = {
     java = {
         executeCommandProvider = {
             commands = {
-                'vscode.java.test.findTestTypesAndMethods',
-                'vscode.java.checkProjectSettings',
-                'vscode.java.resolveMainClass',
-                'vscode.java.resolveClasspath',
-                'vscode.java.startDebugSession',
-                'vscode.java.test.junit.argument',
-                'vscode.java.resolveJavaExecutable',
                 'java.project.getClasspaths',
+                'vscode.java.checkProjectSettings',
+                'vscode.java.resolveClasspath',
+                'vscode.java.resolveJavaExecutable',
+                'vscode.java.resolveMainClass',
+                'vscode.java.startDebugSession',
+                'vscode.java.test.findTestTypesAndMethods',
+                'vscode.java.test.junit.argument',
             }
         }
     }
