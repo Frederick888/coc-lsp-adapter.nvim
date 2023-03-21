@@ -46,15 +46,17 @@ local function get_active_clients(filter)
                 callback(err, result)
             end
             vim.fn['CocRequestAsync'](client.name, method, params, callback_wrapper)
+            return true
         end
 
         ---@diagnostic disable-next-line: unused-local
         function client.request_sync(method, params, timeout_ms, bufnr)
-            vim.fn['CocRequest'](client.name, method, params)
+            return vim.fn['CocRequest'](client.name, method, params)
         end
 
         function client.notify(method, params)
             vim.fn['CocNotify'](client.name, method, params)
+            return true
         end
 
         table.insert(coc_clients, client)
