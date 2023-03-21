@@ -15,6 +15,7 @@ local server_capabilities = {
                 'vscode.java.resolveClasspath',
                 'vscode.java.startDebugSession',
                 'vscode.java.test.junit.argument',
+                'vscode.java.resolveJavaExecutable',
                 'java.project.getClasspaths',
             }
         }
