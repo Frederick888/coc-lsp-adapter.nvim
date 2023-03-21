@@ -34,7 +34,7 @@ function M.coc_dap_initialise()
     return
   end
 
-  require('coc-lsp-adapter')
+  require('coc-lsp-adapter').setup()
   local clients = vim.lsp.get_active_clients()
   if vim.tbl_count(clients) == 0 then
     return

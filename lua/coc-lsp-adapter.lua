@@ -82,14 +82,16 @@ local function buf_get_clients(bufnr)
     })
 end
 
-vim.lsp.get_active_clients = get_active_clients
-vim.lsp.buf_get_clients = buf_get_clients
-
 M.native = native
 M.server_capabilities = server_capabilities
 M.lsp = {
     get_active_clients = get_active_clients,
     buf_get_clients = buf_get_clients,
 }
+
+function M.setup()
+    vim.lsp.get_active_clients = get_active_clients
+    vim.lsp.buf_get_clients = buf_get_clients
+end
 
 return M
