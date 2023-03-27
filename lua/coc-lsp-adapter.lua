@@ -22,6 +22,8 @@ local server_capabilities = {
     }
 }
 
+local coc_services
+local async_counter = 0
 local function get_active_clients(filter)
     filter = filter or {}
     local native_clients = native.get_active_clients(filter)
@@ -29,7 +31,12 @@ local function get_active_clients(filter)
         return native_clients
     end
     local coc_clients = {}
-    local coc_services = vim.fn['CocAction']('services')
+    if async_counter < 0 then
+        async_counter = 0
+    end
+    if async_counter == 0 then
+        coc_services = vim.fn['CocAction']('services')
+    end
     for id, service in pairs(coc_services) do
         if service.state ~= 'running' then
             goto skip_coc_service
@@ -48,8 +55,10 @@ local function get_active_clients(filter)
                 if err == vim.NIL then
                     err = nil
                 end
+                async_counter = async_counter - 1
                 callback(err, result)
             end
+            async_counter = async_counter + 1
             vim.fn['CocRequestAsync'](client.name, method, params, callback_wrapper)
             return true
         end
