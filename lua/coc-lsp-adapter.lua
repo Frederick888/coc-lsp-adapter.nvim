@@ -31,6 +31,10 @@ local function get_active_clients(filter)
     local coc_clients = {}
     local coc_services = vim.fn['CocAction']('services')
     for id, service in pairs(coc_services) do
+        if service.state ~= 'running' then
+            goto skip_coc_service
+        end
+
         local client = {
             id = id,
             name = service.id,
@@ -61,6 +65,8 @@ local function get_active_clients(filter)
         end
 
         table.insert(coc_clients, client)
+
+        ::skip_coc_service::
     end
     if type(filter.id) == 'number' then
         return { coc_clients[filter.id] }
